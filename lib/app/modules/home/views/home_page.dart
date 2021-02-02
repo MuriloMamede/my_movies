@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_movies/app/global/widgets/customBottomAppBar.dart';
 import 'package:my_movies/app/modules/home/controllers/home_controller.dart';
 import 'package:my_movies/app/modules/home/views/widgets/moviesList.dart';
 
@@ -11,32 +12,7 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          color: Colors.red,
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon: Icon(
-                  Icons.home,
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-            IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
-          ]),
-        ),
-      ),
+      bottomNavigationBar: CustomBottomAppBar(),
       // appBar: AppBar(title: Text('Home')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -73,7 +49,10 @@ class HomePage extends GetView<HomeController> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                          'Você ainda não tem nenhum filme marcado para assistir'),
+                                          'Você ainda não tem filmes marcados para assistir',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                          )),
                                     ],
                                   )
                                 : GridView.builder(

@@ -17,4 +17,16 @@ class MovieRepository {
 
     return list;
   }
+
+  searchMovie(String query) async {
+    List<Movie> list = <Movie>[];
+    var response = await apiClient.searchMovie(query);
+    if (response != null) {
+      response.movies.forEach((e) {
+        list.add(e);
+      });
+    }
+
+    return list;
+  }
 }

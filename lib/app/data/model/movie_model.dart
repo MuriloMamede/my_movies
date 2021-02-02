@@ -11,7 +11,7 @@ class Movie {
   final String title;
 
   final String overview;
-  final DateTime releaseDate;
+//  final DateTime releaseDate;
 
   const Movie({
     this.voteCount,
@@ -21,7 +21,7 @@ class Movie {
     this.genreIds,
     this.title,
     this.overview,
-    this.releaseDate,
+    // this.releaseDate,
   });
 
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
@@ -34,6 +34,6 @@ class Movie {
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         title: json["title"],
         overview: json["overview"],
-        releaseDate: DateTime.parse(json["release_date"]),
+        // releaseDate: DateTime.parse(json["release_date"]),
       );
 }

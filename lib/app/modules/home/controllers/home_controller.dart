@@ -9,18 +9,9 @@ class HomeController extends GetxController {
   final moviesPopularList = <Movie>[].obs;
   var myMoviesList = <Movie>[].obs;
 
-  @override
-  void onInit() {
-    //loadData();
-
-    super.onInit();
-  }
-
   void addtoMyList(index) {}
   void markAsWatched(index) {}
   void loadData() async {
     moviesPopularList.assignAll(await repository.getPopular());
-
-    print('loadData');
   }
 }
