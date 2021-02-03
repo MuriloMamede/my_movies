@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:my_movies/app/global/constants.dart';
 import 'package:my_movies/app/global/widgets/customBottomAppBar.dart';
@@ -11,6 +12,10 @@ class HomePage extends GetView<HomeController> {
   final HomeController _homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Scaffold(
       backgroundColor: Colors.black,
       bottomNavigationBar: CustomBottomAppBar(),
@@ -73,8 +78,11 @@ class HomePage extends GetView<HomeController> {
                                             _homeController.myMoviesList.length,
                                         itemBuilder: (context, index) =>
                                             MoviesListWidget(
-                                              buttonText:
-                                                  'Marcar como Assistido',
+                                              buttonText: _homeController
+                                                      .myMoviesList[index]
+                                                      .isWatched
+                                                  ? 'Já Assistido'
+                                                  : 'Marcar como Assistido',
                                               icon: Icons.check,
                                               onTap: () =>
                                                   _.markAsWatched(index),
@@ -113,8 +121,8 @@ class HomePage extends GetView<HomeController> {
                                       buttonText: 'Minha Lista',
                                       icon: Icons.add,
                                       onTap: () => _.addtoMyList(index),
-                                      imageUrl:
-                                          'https://image.tmdb.org/t/p/original/${_.moviesPopularList[index].posterPath}',
+                                      imageUrl: imageUrl +
+                                          _.moviesPopularList[index].posterPath,
                                     )),
                           ),
                         ],

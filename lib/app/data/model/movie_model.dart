@@ -14,13 +14,14 @@ class Movie {
         posterPath: json["poster_path"],
         id: json["id"],
         title: json["title"],
+        isWatched: false,
       );
 
   factory Movie.fromDBMap(Map<String, dynamic> json) => Movie(
         posterPath: json["posterPath"],
         id: json["id"],
         title: json["title"],
-        isWatched: json["isWatched"] == 0 ? true : false,
+        isWatched: json["isWatched"] == 0 ? false : true,
       );
 
   Map<String, dynamic> toMap() {
@@ -28,7 +29,7 @@ class Movie {
       'posterPath': this.posterPath,
       'id': this.id,
       'title': this.title,
-      'isWatched': 0
+      'isWatched': isWatched,
     };
 
     if (id != null) {

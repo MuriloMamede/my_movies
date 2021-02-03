@@ -60,7 +60,9 @@ class SearchPage extends GetView<SearchController> {
                                       : imageUrl +
                                           _searchController
                                               .movies[index].posterPath,
-                              onPressed: () {},
+                              onPressed: () {
+                                _searchController.addtoMyList(index);
+                              },
                             ));
                   }),
                 )
