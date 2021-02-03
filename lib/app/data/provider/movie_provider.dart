@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_movies/app/data/model/movie_response_model.dart';
 
-import 'package:my_movies/app/global/api_.dart';
+import 'package:my_movies/app/global/constants.dart';
 
 class MovieApiClient extends GetConnect {
   final String token = kApiKey;

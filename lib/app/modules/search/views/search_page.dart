@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_movies/app/global/constants.dart';
 import 'package:my_movies/app/global/widgets/customBottomAppBar.dart';
 import 'package:my_movies/app/modules/search/controllers/search_controller.dart';
+import 'package:my_movies/app/modules/search/views/widgets/customListTile.dart';
 
 class SearchPage extends GetView<SearchController> {
   final SearchController _searchController = Get.find<SearchController>();
@@ -46,16 +48,21 @@ class SearchPage extends GetView<SearchController> {
                   ),
                 ),
                 Expanded(
-                  child: Obx(
-                    () => ListView.builder(
+                  child: Obx(() {
+                    return ListView.builder(
                         itemCount: _searchController.movies.length,
-                        itemBuilder: (context, index) => ListTile(
-                              title: Text(
-                                _searchController.movies[index].title,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            )),
-                  ),
+                        itemBuilder: (context, index) => CustomListTile(
+                              title: _searchController.movies[index].title,
+                              imageUrl:
+                                  _searchController.movies[index].posterPath ==
+                                          null
+                                      ? imgNotFound
+                                      : imageUrl +
+                                          _searchController
+                                              .movies[index].posterPath,
+                              onPressed: () {},
+                            ));
+                  }),
                 )
               ],
             ),

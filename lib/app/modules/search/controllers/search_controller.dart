@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:my_movies/app/data/model/movie_model.dart';
 
@@ -17,7 +16,5 @@ class SearchController extends GetxController {
     }
   }
 
-  /*void loadData() async {
-    movies.assignAll(await repository.getPopular());
-  }*/
+  void addtoMyList(index) {}
 }

@@ -1,39 +1,40 @@
 import 'dart:convert';
 
 class Movie {
-  final int voteCount;
-
   final String posterPath;
-  final int id;
-
-  final String originalTitle;
-  final List<int> genreIds;
+  int id;
   final String title;
+  bool isWatched;
 
-  final String overview;
-//  final DateTime releaseDate;
-
-  const Movie({
-    this.voteCount,
-    this.posterPath,
-    this.id,
-    this.originalTitle,
-    this.genreIds,
-    this.title,
-    this.overview,
-    // this.releaseDate,
-  });
+  Movie({this.posterPath, this.id, this.title, this.isWatched});
 
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
 
   factory Movie.fromMap(Map<String, dynamic> json) => Movie(
-        voteCount: json["vote_count"],
         posterPath: json["poster_path"],
         id: json["id"],
-        originalTitle: json["original_title"],
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         title: json["title"],
-        overview: json["overview"],
-        // releaseDate: DateTime.parse(json["release_date"]),
       );
+
+  factory Movie.fromDBMap(Map<String, dynamic> json) => Movie(
+        posterPath: json["posterPath"],
+        id: json["id"],
+        title: json["title"],
+        isWatched: json["isWatched"] == 0 ? true : false,
+      );
+
+  Map<String, dynamic> toMap() {
+    var map = <String, dynamic>{
+      'posterPath': this.posterPath,
+      'id': this.id,
+      'title': this.title,
+      'isWatched': 0
+    };
+
+    if (id != null) {
+      map['id'] = this.id;
+    }
+
+    return map;
+  }
 }

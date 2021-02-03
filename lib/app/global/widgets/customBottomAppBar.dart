@@ -6,6 +6,7 @@ class CustomBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       child: Container(
+        height: Get.height * 0.06,
         color: Colors.red,
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           IconButton(
@@ -14,6 +15,7 @@ class CustomBottomAppBar extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
+                Get.reset();
                 Get.toNamed('/search');
               }),
           IconButton(
@@ -22,6 +24,7 @@ class CustomBottomAppBar extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
+                Get.reset();
                 Get.toNamed('/home');
               }),
           IconButton(
