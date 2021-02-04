@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:my_movies/app/global/constants.dart';
 
 class Movie {
   final String posterPath;
@@ -18,22 +19,22 @@ class Movie {
       );
 
   factory Movie.fromDBMap(Map<String, dynamic> json) => Movie(
-        posterPath: json["posterPath"],
-        id: json["id"],
-        title: json["title"],
-        isWatched: json["isWatched"] == 0 ? false : true,
+        posterPath: json[MYMOVIES_POSTERPATH],
+        id: json[MYMOVIES_ID],
+        title: json[MYMOVIES_TITLE],
+        isWatched: json[MYMOVIES_ISWATCHED] == 0 ? false : true,
       );
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      'posterPath': this.posterPath,
-      'id': this.id,
-      'title': this.title,
-      'isWatched': isWatched,
+      MYMOVIES_POSTERPATH: this.posterPath,
+      MYMOVIES_ID: this.id,
+      MYMOVIES_TITLE: this.title,
+      MYMOVIES_ISWATCHED: isWatched == true ? 1 : 0,
     };
 
     if (id != null) {
-      map['id'] = this.id;
+      map[MYMOVIES_ID] = this.id;
     }
 
     return map;

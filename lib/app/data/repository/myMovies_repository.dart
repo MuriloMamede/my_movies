@@ -1,7 +1,7 @@
 import 'package:my_movies/app/data/provider/myMovies_provider.dart';
 
 class MyMoviesRepository {
-  final MyMoviesProvider apiClient = MyMoviesProvider();
+  final MyMoviesApiClient apiClient = MyMoviesApiClient();
 
   getAll() {
     return apiClient.getItens();

@@ -9,7 +9,7 @@ void main() {
     title: 'Meus Filmes',
     debugShowCheckedModeBanner: true,
     getPages: AppPages.routes,
-    initialRoute: Routes.HOME,
+    initialRoute: Routes.LOGIN,
     theme: appThemeData,
   ));
 }

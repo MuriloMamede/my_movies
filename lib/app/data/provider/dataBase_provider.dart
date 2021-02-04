@@ -1,3 +1,4 @@
+import 'package:my_movies/app/global/constants.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -6,13 +7,8 @@ class DataBaseProvider {
   DataBaseProvider._();
   static final DataBaseProvider db = DataBaseProvider._();
 
-  static const String MYMOVIES_TABLE = 'myMovies';
-  static const String MYMOVIES_ID = 'id';
-  static const String MYMOVIES_TITLE = 'title';
-  static const String MYMOVIES_POSTERPATH = 'posterPath';
-  static const String MYMOVIES_ISWATCHED = 'isWatched';
-
   Database _database;
+  //DatabaseFactory _databaseFactory;
   deleteAll() async {
     final db = await database;
     db.rawDelete("DELETE from myMovies");
@@ -42,6 +38,14 @@ class DataBaseProvider {
           "$MYMOVIES_TITLE TEXT,"
           "$MYMOVIES_ISWATCHED INTEGER,"
           "$MYMOVIES_POSTERPATH TEXT"
+          ")");
+
+      await database.execute("CREATE TABLE $USER_TABLE ("
+          "$USER_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+          "$USER_NAME TEXT,"
+          "$USER_EMAIL INTEGER,"
+          "$USER_BIRTHDATE INTEGER,"
+          "$USER_PASSWORD TEXT"
           ")");
     });
   }

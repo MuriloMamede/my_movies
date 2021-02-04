@@ -21,8 +21,6 @@ class HomeController extends GetxController {
         Get.defaultDialog(
             title: 'Ops...', content: Text('Filme já adicionada na lista'));
       }
-
-      print(e);
     }
   }
 
@@ -41,8 +39,6 @@ class HomeController extends GetxController {
         Get.defaultDialog(
             title: 'Ops...', content: Text('Filme já adicionada na lista'));
       }
-
-      print(e);
     }
   }
 

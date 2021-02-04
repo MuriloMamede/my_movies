@@ -1,16 +1,17 @@
 import 'package:my_movies/app/data/model/movie_model.dart';
 import 'package:my_movies/app/data/provider/dataBase_provider.dart';
+import 'package:my_movies/app/global/constants.dart';
 
-class MyMoviesProvider {
+class MyMoviesApiClient {
   final databaseProvider = DataBaseProvider.db;
 
   Future<List<Movie>> getItens() async {
     final db = await databaseProvider.database;
-    var itens = await db.query(DataBaseProvider.MYMOVIES_TABLE, columns: [
-      DataBaseProvider.MYMOVIES_TITLE,
-      DataBaseProvider.MYMOVIES_POSTERPATH,
-      DataBaseProvider.MYMOVIES_ISWATCHED,
-      DataBaseProvider.MYMOVIES_ID,
+    var itens = await db.query(MYMOVIES_TABLE, columns: [
+      MYMOVIES_TITLE,
+      MYMOVIES_POSTERPATH,
+      MYMOVIES_ISWATCHED,
+      MYMOVIES_ID,
     ]);
 
     List<Movie> itemList = List<Movie>();
@@ -26,7 +27,7 @@ class MyMoviesProvider {
 
   Future<Movie> insertItem(Movie item) async {
     final db = await databaseProvider.database;
-    item.id = await db.insert(DataBaseProvider.MYMOVIES_TABLE, item.toMap());
+    item.id = await db.insert(MYMOVIES_TABLE, item.toMap());
 
     return item;
   }
@@ -35,7 +36,7 @@ class MyMoviesProvider {
     final db = await databaseProvider.database;
 
     return await db.delete(
-      DataBaseProvider.MYMOVIES_TABLE,
+      MYMOVIES_TABLE,
       where: "id = ?",
       whereArgs: [id],
     );
@@ -45,7 +46,7 @@ class MyMoviesProvider {
     final db = await databaseProvider.database;
 
     return await db.update(
-      DataBaseProvider.MYMOVIES_TABLE,
+      MYMOVIES_TABLE,
       item.toMap(),
       where: "id = ?",
       whereArgs: [item.id],
