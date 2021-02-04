@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:my_movies/app/data/model/profile_model.dart';
 import 'package:my_movies/app/data/model/user_model.dart';
 import 'package:my_movies/app/data/provider/dataBase_provider.dart';
 import 'package:my_movies/app/global/constants.dart';
@@ -13,7 +14,7 @@ class UserApiClient {
     User user;
     try {
       print(sha1.convert(utf8.encode(passwd)).toString());
-      List<dynamic> result = await db.query(USER_TABLE,
+      var result = await db.query(USER_TABLE,
           columns: [
             USER_EMAIL,
             USER_PASSWORD,
@@ -25,8 +26,7 @@ class UserApiClient {
           whereArgs: [sha1.convert(utf8.encode(passwd)).toString(), email]);
 
       if (result.length > 0) {
-        print(result.first.queryResultSet);
-        user = User.fromMap(result.first.queryResultSet[0]);
+        user = User.fromMap(result.first);
         return user;
       } else
         return null;
@@ -45,6 +45,9 @@ class UserApiClient {
           whereArgs: [user.email]);
       if (result.length <= 0) {
         user.id = await db.insert(USER_TABLE, user.toMap());
+        Profile profile;
+        profile.id = await db.insert(
+            PROFILE_TABLE, Profile(name: user.name, userId: user.id).toMap());
         return user;
       } else
         return null;

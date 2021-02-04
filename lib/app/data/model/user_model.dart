@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:my_movies/app/global/constants.dart';
 import 'package:crypto/crypto.dart';
 
@@ -10,7 +9,13 @@ class User {
   String name;
   DateTime birthDate;
 
-  User({this.name, this.birthDate, this.email, this.password, this.id});
+  User({
+    this.name,
+    this.birthDate,
+    this.email,
+    this.password,
+    this.id,
+  });
 
   factory User.fromMap(Map<String, dynamic> json) => User(
         email: json[USER_EMAIL],

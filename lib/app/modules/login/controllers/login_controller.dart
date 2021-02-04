@@ -31,6 +31,9 @@ class LoginController extends GetxController {
 
     if (user != null) {
       Get.offNamed(Routes.HOME, arguments: user);
+    } else {
+      Get.defaultDialog(
+          title: 'Ops..', content: Text('Email e/ou senha incorretos'));
     }
   }
 }

@@ -6,8 +6,9 @@ class Movie {
   int id;
   final String title;
   bool isWatched;
+  int idProfile;
 
-  Movie({this.posterPath, this.id, this.title, this.isWatched});
+  Movie({this.posterPath, this.id, this.title, this.isWatched, this.idProfile});
 
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
 
@@ -23,10 +24,12 @@ class Movie {
         id: json[MYMOVIES_ID],
         title: json[MYMOVIES_TITLE],
         isWatched: json[MYMOVIES_ISWATCHED] == 0 ? false : true,
+        idProfile: json[MYMOVIES_ID_PROFILE],
       );
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
+      MYMOVIES_ID_PROFILE: this.idProfile,
       MYMOVIES_POSTERPATH: this.posterPath,
       MYMOVIES_ID: this.id,
       MYMOVIES_TITLE: this.title,
