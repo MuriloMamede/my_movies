@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_movies/app/routes/app_routes.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   @override
@@ -16,7 +17,9 @@ class CustomBottomAppBar extends StatelessWidget {
               ),
               onPressed: () {
                 Get.reset();
-                Get.toNamed('/search');
+                Get.offNamed(
+                  Routes.SEARCH,
+                );
               }),
           IconButton(
               icon: Icon(
@@ -25,7 +28,9 @@ class CustomBottomAppBar extends StatelessWidget {
               ),
               onPressed: () {
                 Get.reset();
-                Get.toNamed('/home');
+                Get.offNamed(
+                  Routes.HOME,
+                );
               }),
           IconButton(
               icon: Icon(

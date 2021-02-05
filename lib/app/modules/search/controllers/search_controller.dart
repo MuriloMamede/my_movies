@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:my_movies/app/data/model/movie_model.dart';
 
 import 'package:my_movies/app/data/repository/movie_repository.dart';
@@ -8,7 +9,10 @@ import 'package:my_movies/app/data/repository/myMovies_repository.dart';
 class SearchController extends GetxController {
   final MovieRepository repository = MovieRepository();
   final MyMoviesRepository _myMoviesRepository = MyMoviesRepository();
+  final data = GetStorage();
 
+  int get userId => data.read("userId");
+  int get profileId => data.read("profileId");
   var movies = <Movie>[].obs;
 
   void searchMovie(String query) async {
@@ -21,14 +25,23 @@ class SearchController extends GetxController {
 
   void addtoMyList(int index) async {
     //  movies[index].
+    Movie selectedMovie = movies[index];
+    Movie movieUpdated = Movie(
+        idTMDB: selectedMovie.id,
+        isWatched: selectedMovie.isWatched,
+        posterPath: selectedMovie.posterPath,
+        idProfile: profileId,
+        title: selectedMovie.title);
     try {
-      await _myMoviesRepository.add(movies[index]);
-      Get.defaultDialog(title: 'Sucesso', content: Text('Filme adicionado'));
-    } catch (e) {
-      if (e.getResultCode() == 1555) {
+      var result = await _myMoviesRepository.add(movieUpdated);
+      if (result != null) {
+        Get.defaultDialog(title: 'Sucesso', content: Text('Filme adicionado'));
+      } else {
         Get.defaultDialog(
             title: 'Ops...', content: Text('Filme já adicionada na lista'));
-      } else {
+      }
+    } catch (e) {
+      if (e.getResultCode() == 1555) {
         Get.defaultDialog(
             title: 'Ops',
             content: Text('Error: ' + e.getResultCode().toString()));

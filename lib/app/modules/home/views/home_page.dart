@@ -10,16 +10,129 @@ import 'package:my_movies/app/modules/home/views/widgets/moviesList.dart';
 
 class HomePage extends GetView<HomeController> {
   final HomeController _homeController = Get.find<HomeController>();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    void showProfileAdder() {
+      Get.defaultDialog(
+        content: TextField(
+          controller: _homeController.nameProfileController,
+          decoration: InputDecoration(labelText: 'Nome:'),
+        ),
+        title: 'Novo Perfil',
+        actions: [
+          InkWell(
+            onTap: () {
+              _homeController.addProfile();
+            },
+            child: Container(
+              height: 45,
+              width: Get.width / 1.2,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Get.theme.primaryColor,
+                      Get.theme.primaryColor,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(50))),
+              child: Center(
+                child: Text(
+                  'Salvar'.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    void showProfilePicker() {
+      showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.black,
+            title: Text(
+              "Selecione um Perfil",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    width: double.maxFinite,
+                    height: Get.height / 3,
+                    child: Obx(
+                      () => GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 1,
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 1,
+                                  mainAxisSpacing: 1),
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) =>
+                              GestureDetector(
+                                onTap: () {
+                                  _homeController.selectPerfil(
+                                      _homeController.profilesList[index].id);
+                                },
+                                child: Container(
+                                  color: Colors.white,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.person,
+                                        color: Colors.black,
+                                        size: 40,
+                                      ),
+                                      Text(_homeController
+                                          .profilesList[index].name),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                          // separatorBuilder: (context, index) => Container(),
+                          itemCount: _homeController.profilesList.length),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        //Get.back();
+                        showProfileAdder();
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        color: Colors.white,
+                        child: Icon(Icons.add),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       bottomNavigationBar: CustomBottomAppBar(),
-      // appBar: AppBar(title: Text('Home')),
       body: SingleChildScrollView(
         child: Container(
           width: Get.width * 1,
@@ -38,12 +151,29 @@ class HomePage extends GetView<HomeController> {
                           Expanded(
                               child: Column(
                             children: [
+                              GestureDetector(
+                                onTap: showProfilePicker,
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          Icons.person,
+                                          color: Colors.white,
+                                        ),
+                                        Text('Trocar Perfil'),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                               Container(
-                                height: Get.height * 0.1,
+                                height: Get.height * 0.07,
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 20),
+                                      padding: const EdgeInsets.only(top: 0),
                                       child: Text(
                                         'Minha Lista',
                                         style: TextStyle(fontSize: 30),

@@ -5,6 +5,7 @@ const imgNotFound = 'https://i.imgur.com/cb5sTfZ.png';
 
 const String MYMOVIES_TABLE = 'myMovies';
 const String MYMOVIES_ID = 'id';
+const String MYMOVIES_ID_TMDB = 'idTMDB';
 const String MYMOVIES_TITLE = 'title';
 const String MYMOVIES_POSTERPATH = 'posterPath';
 const String MYMOVIES_ISWATCHED = 'isWatched';

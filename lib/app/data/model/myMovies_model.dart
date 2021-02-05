@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:my_movies/app/data/model/movie_model.dart';
 import 'package:my_movies/app/global/constants.dart';
 
 class MyMovie {

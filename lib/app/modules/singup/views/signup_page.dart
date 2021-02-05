@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import 'package:my_movies/app/modules/login/controllers/login_controller.dart';
 
@@ -14,7 +15,24 @@ class SignUpPage extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    void showDatPicker() async {
+      final date = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2150),
+        locale: Localizations.localeOf(context),
+      );
+      if (date != null) {
+        _loginController.dateS.value =
+            DateFormat(DateFormat.YEAR_MONTH_DAY, "pt_Br").format(date);
+
+        _loginController.date = date;
+      }
+    }
+
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
         child: Form(
           key: _formKey,
@@ -27,13 +45,25 @@ class SignUpPage extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Get.theme.primaryColor, Color(0xff6bceff)],
+                      colors: [
+                        Get.theme.primaryColor,
+                        Colors.black,
+                      ],
                     ),
                     borderRadius:
                         BorderRadius.only(bottomLeft: Radius.circular(90))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                          onPressed: () => Get.back()),
+                    ),
                     Spacer(),
                     Align(
                       alignment: Alignment.center,
@@ -189,6 +219,49 @@ class SignUpPage extends StatelessWidget {
                             color: Get.theme.primaryColor,
                           ),
                           hintText: 'Confirmar Senha',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showDatPicker();
+                      },
+                      child: Container(
+                        height: 45,
+                        width: MediaQuery.of(context).size.width / 1.2,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.white,
+                                Colors.white,
+                              ],
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.date_range,
+                                color: Colors.red,
+                              ),
+                              SizedBox(
+                                width: Get.width * 0.05,
+                              ),
+                              Obx(() => Text(
+                                    _loginController.dateS.value == ''
+                                        ? 'Data Nascimento'.toUpperCase()
+                                        : _loginController.dateS.value,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ],
+                          ),
                         ),
                       ),
                     ),

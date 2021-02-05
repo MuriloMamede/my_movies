@@ -7,6 +7,10 @@ class MyMoviesRepository {
     return apiClient.getItens();
   }
 
+  getProfileMovies(idProfile) {
+    return apiClient.getProfileMovies(idProfile);
+  }
+
   delete(id) {
     return apiClient.deleteItem(id);
   }

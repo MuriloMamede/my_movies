@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
                       child: Icon(
                         Icons.person,
                         size: 90,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                     Spacer(),
@@ -76,12 +76,12 @@ class LoginPage extends StatelessWidget {
                           top: 4, left: 16, right: 16, bottom: 4),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(50)),
-                          color: Colors.grey,
+                          color: Colors.white,
                           boxShadow: [
                             BoxShadow(color: Colors.black12, blurRadius: 5)
                           ]),
                       child: TextFormField(
-                        cursorColor: Colors.white,
+                        cursorColor: Colors.black,
                         controller: _loginController.emailTextController,
                         validator: (value) {
                           if (value.isEmpty) {
@@ -95,7 +95,7 @@ class LoginPage extends StatelessWidget {
                             border: InputBorder.none,
                             icon: Icon(
                               Icons.email,
-                              color: Colors.white,
+                              color: Get.theme.primaryColor,
                             ),
                             hintText: 'Email',
                             hintStyle: TextStyle(color: Colors.black)),
@@ -109,7 +109,7 @@ class LoginPage extends StatelessWidget {
                           top: 4, left: 16, right: 16, bottom: 4),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(50)),
-                          color: Colors.white.withOpacity(0.6),
+                          color: Colors.white,
                           boxShadow: [
                             BoxShadow(color: Colors.black12, blurRadius: 5)
                           ]),
@@ -121,13 +121,13 @@ class LoginPage extends StatelessWidget {
                           }
                           return null;
                         },
-                        cursorColor: Colors.white,
+                        cursorColor: Colors.black,
                         obscureText: true,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(
                               Icons.vpn_key,
-                              color: Colors.white,
+                              color: Get.theme.primaryColor,
                             ),
                             hintText: 'Senha',
                             hintStyle: TextStyle(color: Colors.black)),
@@ -139,7 +139,7 @@ class LoginPage extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 16, right: 32),
                         child: Text(
                           'Esqueceu a Senha ?',
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
@@ -150,7 +150,7 @@ class LoginPage extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 16, right: 32),
                           child: Text(
                             'Cadastrar',
-                            style: TextStyle(color: Colors.grey),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
@@ -181,7 +181,7 @@ class LoginPage extends StatelessWidget {
                           child: Text(
                             'Entrar'.toUpperCase(),
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),

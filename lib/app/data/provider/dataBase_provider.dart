@@ -38,6 +38,7 @@ class DataBaseProvider {
           "$MYMOVIES_TITLE TEXT,"
           "$MYMOVIES_ISWATCHED INTEGER,"
           "$MYMOVIES_ID_PROFILE INTEGER,"
+          "$MYMOVIES_ID_TMDB INTEGER,"
           "$MYMOVIES_POSTERPATH TEXT"
           ")");
 
@@ -48,6 +49,7 @@ class DataBaseProvider {
           "$USER_BIRTHDATE INTEGER,"
           "$USER_PASSWORD TEXT"
           ")");
+
       await database.execute("CREATE TABLE $PROFILE_TABLE ("
           "$PROFILE_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
           "$PROFILE_NAME TEXT,"

@@ -45,9 +45,8 @@ class UserApiClient {
           whereArgs: [user.email]);
       if (result.length <= 0) {
         user.id = await db.insert(USER_TABLE, user.toMap());
-        Profile profile;
-        profile.id = await db.insert(
-            PROFILE_TABLE, Profile(name: user.name, userId: user.id).toMap());
+        Profile profile = Profile(name: user.name, userId: user.id);
+        profile.id = await db.insert(PROFILE_TABLE, profile.toMap());
         return user;
       } else
         return null;
