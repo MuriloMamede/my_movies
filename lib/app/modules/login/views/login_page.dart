@@ -24,8 +24,8 @@ class LoginPage extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 3.5,
+                width: Get.width,
+                height: Get.height / 3.5,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: MediaQuery.of(context).size.width / 1.2,
+                      width: Get.width / 1.2,
                       height: 45,
                       padding: EdgeInsets.only(
                           top: 4, left: 16, right: 16, bottom: 4),
@@ -102,7 +102,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width / 1.2,
+                      width: Get.width / 1.2,
                       height: 45,
                       margin: EdgeInsets.only(top: 32),
                       padding: EdgeInsets.only(
@@ -167,7 +167,7 @@ class LoginPage extends StatelessWidget {
                       },
                       child: Container(
                         height: 45,
-                        width: MediaQuery.of(context).size.width / 1.2,
+                        width: Get.width / 1.2,
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [

@@ -26,14 +26,10 @@ class SearchController extends GetxController {
   void addtoMyList(int index) async {
     //  movies[index].
     Movie selectedMovie = movies[index];
-    Movie movieUpdated = Movie(
-        idTMDB: selectedMovie.id,
-        isWatched: selectedMovie.isWatched,
-        posterPath: selectedMovie.posterPath,
-        idProfile: profileId,
-        title: selectedMovie.title);
+    selectedMovie.idProfile = profileId;
     try {
-      var result = await _myMoviesRepository.add(movieUpdated);
+      var result = await _myMoviesRepository.add(selectedMovie);
+      print(result);
       if (result != null) {
         Get.defaultDialog(title: 'Sucesso', content: Text('Filme adicionado'));
       } else {

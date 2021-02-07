@@ -17,7 +17,7 @@ void main() async {
       Locale("pt", "BR"),
     ],
     title: 'Meus Filmes',
-    debugShowCheckedModeBanner: true,
+    debugShowCheckedModeBanner: false,
     getPages: AppPages.routes,
     initialRoute: Routes.LOGIN,
     theme: appThemeData,

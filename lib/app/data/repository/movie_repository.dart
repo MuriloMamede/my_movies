@@ -29,4 +29,16 @@ class MovieRepository {
 
     return list;
   }
+
+  getRecomendedMovies(idProfile) async {
+    List<Movie> list = <Movie>[];
+    var response = await apiClient.getRecomendedMovies(idProfile);
+    if (response != null) {
+      response.movies.forEach((e) {
+        list.add(e);
+      });
+    }
+
+    return list;
+  }
 }

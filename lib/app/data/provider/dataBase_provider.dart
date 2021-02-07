@@ -15,8 +15,6 @@ class DataBaseProvider {
   }
 
   Future<Database> get database async {
-    print("database getter called");
-
     if (_database != null) {
       return _database;
     }
@@ -34,12 +32,13 @@ class DataBaseProvider {
       print("Creating table item");
 
       await database.execute("CREATE TABLE $MYMOVIES_TABLE ("
-          "$MYMOVIES_ID INTEGER PRIMARY KEY,"
+          "$MYMOVIES_ID INTEGER,"
           "$MYMOVIES_TITLE TEXT,"
           "$MYMOVIES_ISWATCHED INTEGER,"
           "$MYMOVIES_ID_PROFILE INTEGER,"
-          "$MYMOVIES_ID_TMDB INTEGER,"
-          "$MYMOVIES_POSTERPATH TEXT"
+          "$MYMOVIES_POSTERPATH TEXT,"
+          "$MYMOVIES_GENRES_ID TEXT,"
+          "PRIMARY KEY ($MYMOVIES_ID, $MYMOVIES_ID_PROFILE)"
           ")");
 
       await database.execute("CREATE TABLE $USER_TABLE ("

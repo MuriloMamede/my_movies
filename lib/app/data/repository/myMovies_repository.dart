@@ -22,4 +22,12 @@ class MyMoviesRepository {
   add(obj) {
     return apiClient.insertItem(obj);
   }
+
+  getGenresId(idMovie) {
+    return apiClient.getGenresId(idMovie);
+  }
+
+  getPreferedGenres(idProfile) {
+    return apiClient.getPreferedGenres(idProfile);
+  }
 }

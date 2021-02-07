@@ -7,15 +7,17 @@ class Movie {
   final String title;
   bool isWatched;
   int idProfile;
-  int idTMDB;
+  List<int> listGenresId;
+  String genresId;
 
   Movie(
       {this.posterPath,
-      this.idTMDB,
       this.title,
       this.isWatched,
       this.idProfile,
-      this.id});
+      this.id,
+      this.listGenresId,
+      this.genresId});
 
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
 
@@ -24,6 +26,7 @@ class Movie {
         id: json["id"],
         title: json["title"],
         isWatched: false,
+        listGenresId: List<int>.from(json["genre_ids"].map((x) => x)),
       );
 
   factory Movie.fromDBMap(Map<String, dynamic> json) => Movie(
@@ -32,24 +35,40 @@ class Movie {
         title: json[MYMOVIES_TITLE],
         isWatched: json[MYMOVIES_ISWATCHED] == 0 ? false : true,
         idProfile: json[MYMOVIES_ID_PROFILE],
-        idTMDB: json[MYMOVIES_ID_TMDB],
+        genresId: json[MYMOVIES_GENRES_ID],
       );
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      MYMOVIES_ID_TMDB: this.idTMDB,
       MYMOVIES_ID_PROFILE: this.idProfile,
       MYMOVIES_POSTERPATH: this.posterPath,
       MYMOVIES_ID: this.id,
       MYMOVIES_TITLE: this.title,
       MYMOVIES_ISWATCHED: isWatched == true ? 1 : 0,
+      MYMOVIES_GENRES_ID: getGenresIds(this.listGenresId),
     };
-    print(map);
 
     if (id != null) {
       map[MYMOVIES_ID] = this.id;
     }
 
     return map;
+  }
+
+  String getGenresIds(List<int> listGenresId) {
+    String genresId = '';
+    if (listGenresId != null) {
+      for (var i = 0; i < listGenresId.length; i++) {
+        if (listGenresId.length == 1) {
+          genresId += listGenresId[i].toString();
+        } else {
+          if (i == listGenresId.length - 1) {
+            genresId += listGenresId[i].toString();
+          } else
+            genresId += listGenresId[i].toString() + ',';
+        }
+      }
+    }
+    return genresId;
   }
 }

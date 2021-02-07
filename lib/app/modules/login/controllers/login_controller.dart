@@ -44,6 +44,7 @@ class LoginController extends GetxController {
       Profile profile = await profileRepository.getFirstUserProfile(user.id);
       data.write("userId", user.id);
       data.write("profileId", profile.id);
+      data.write("user", user.toMap());
       Get.offNamed(Routes.HOME);
     } else {
       Get.defaultDialog(

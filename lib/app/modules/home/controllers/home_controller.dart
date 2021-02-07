@@ -17,32 +17,33 @@ class HomeController extends GetxController {
   final data = GetStorage();
 
   final moviesPopularList = <Movie>[].obs;
+  final moviesRecomendedList = <Movie>[].obs;
   var myMoviesList = <Movie>[].obs;
   var profilesList = <Profile>[].obs;
   int get userId => data.read("userId");
   int get profileId => data.read("profileId");
 
-  void addtoMyList(int index) async {
-    Movie selectedMovie = moviesPopularList[index];
-    Movie movieUpdated = Movie(
-        idTMDB: selectedMovie.id,
-        isWatched: selectedMovie.isWatched,
-        posterPath: selectedMovie.posterPath,
-        idProfile: profileId,
-        title: selectedMovie.title);
+  void addtoMyList(obj) async {
+    Movie selectedMovie = obj;
+
+    selectedMovie.idProfile = profileId;
     try {
-      Movie newMovie = await _myMoviesRepository.add(movieUpdated);
+      Movie newMovie = await _myMoviesRepository.add(selectedMovie);
+
       if (newMovie == null) {
         Get.defaultDialog(
             title: 'Ops...', content: Text('Filme já adicionada na lista'));
+      } else {
+        myMoviesList.add(newMovie);
       }
-      myMoviesList.add(newMovie);
-    } catch (e) {}
+    } catch (e) {
+      Get.defaultDialog(title: 'Ops...', content: Text(e.toString()));
+    }
   }
 
   void selectPerfil(id) async {
     data.write("profileId", id);
-    print(profileId);
+
     myMoviesList.assignAll(await _myMoviesRepository.getProfileMovies(id));
     Get.back();
   }
@@ -64,20 +65,13 @@ class HomeController extends GetxController {
 
   void markAsWatched(index) async {
     Movie selectedMovie = myMoviesList[index];
-    Movie movieUpdated = Movie(
-        idTMDB: selectedMovie.idTMDB,
-        id: selectedMovie.id,
-        isWatched: !selectedMovie.isWatched,
-        posterPath: selectedMovie.posterPath,
-        idProfile: profileId,
-        title: selectedMovie.title);
+    selectedMovie.isWatched = !selectedMovie.isWatched;
     try {
-      await _myMoviesRepository.edit(movieUpdated);
-      myMoviesList[index] = movieUpdated;
+      await _myMoviesRepository.edit(selectedMovie);
+      myMoviesList[index] = selectedMovie;
     } catch (e) {
       if (e.getResultCode() == 1555) {
-        Get.defaultDialog(
-            title: 'Ops...', content: Text('Filme já adicionada na lista'));
+        Get.defaultDialog(title: 'Ops...', content: Text(e.toString()));
       }
     }
   }
@@ -88,10 +82,11 @@ class HomeController extends GetxController {
 
   @override
   void onInit() async {
-    print('id:' + profileId.toString());
     myMoviesList
         .assignAll(await _myMoviesRepository.getProfileMovies(profileId));
     profilesList.assignAll(await _profileRepository.getUserProfiles(userId));
+    moviesRecomendedList
+        .assignAll(await _repository.getRecomendedMovies(profileId));
     super.onInit();
   }
 }

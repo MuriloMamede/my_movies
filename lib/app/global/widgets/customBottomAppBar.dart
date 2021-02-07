@@ -37,7 +37,12 @@ class CustomBottomAppBar extends StatelessWidget {
                 Icons.menu,
                 color: Colors.white,
               ),
-              onPressed: () {}),
+              onPressed: () {
+                Get.reset();
+                Get.offNamed(
+                  Routes.OPTIONS,
+                );
+              }),
         ]),
       ),
     );
