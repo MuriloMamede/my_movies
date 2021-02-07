@@ -1,6 +1,6 @@
 ## Meus Filmes
 
-Projeto flutter para te ajudar a gerenciar os filmes que você deseja assistir ou já tenha assistido.
+Projeto Android Flutter para te ajudar a gerenciar os filmes que você deseja assistir ou já tenha assistido.
 
 
 
