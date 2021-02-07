@@ -68,7 +68,7 @@ class MyMoviesApiClient {
     return genresId;
   }
 
-  Future<String> getPreferedGenres(int idProfile) async {
+  Future<String> getPreferredGenres(int idProfile) async {
     //pega todos os filmes que o perfil adicionou na lista
     List<Movie> movies = await getProfileMovies(idProfile);
     String genresId = '';

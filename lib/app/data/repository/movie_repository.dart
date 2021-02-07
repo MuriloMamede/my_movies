@@ -30,9 +30,9 @@ class MovieRepository {
     return list;
   }
 
-  getRecomendedMovies(idProfile) async {
+  getRecommendedMovies(idProfile) async {
     List<Movie> list = <Movie>[];
-    var response = await apiClient.getRecomendedMovies(idProfile);
+    var response = await apiClient.getRecommendedMovies(idProfile);
     if (response != null) {
       response.movies.forEach((e) {
         list.add(e);

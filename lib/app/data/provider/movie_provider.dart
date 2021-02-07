@@ -27,9 +27,9 @@ class MovieApiClient extends GetConnect {
     }
   }
 
-  getRecomendedMovies(int idProfile) async {
+  getRecommendedMovies(int idProfile) async {
     MyMoviesRepository _myMovies = MyMoviesRepository();
-    String genresId = await _myMovies.getPreferedGenres(idProfile);
+    String genresId = await _myMovies.getPreferredGenres(idProfile);
 
     var response = await get(kBaseUrl +
         "/discover/movie?api_key=$kApiKey&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=$genresId");

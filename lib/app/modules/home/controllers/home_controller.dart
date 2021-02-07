@@ -86,7 +86,7 @@ class HomeController extends GetxController {
         .assignAll(await _myMoviesRepository.getProfileMovies(profileId));
     profilesList.assignAll(await _profileRepository.getUserProfiles(userId));
     moviesRecomendedList
-        .assignAll(await _repository.getRecomendedMovies(profileId));
+        .assignAll(await _repository.getRecommendedMovies(profileId));
     super.onInit();
   }
 }

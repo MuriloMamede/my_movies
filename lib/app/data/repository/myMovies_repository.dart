@@ -27,7 +27,7 @@ class MyMoviesRepository {
     return apiClient.getGenresId(idMovie);
   }
 
-  getPreferedGenres(idProfile) {
-    return apiClient.getPreferedGenres(idProfile);
+  getPreferredGenres(idProfile) {
+    return apiClient.getPreferredGenres(idProfile);
   }
 }
