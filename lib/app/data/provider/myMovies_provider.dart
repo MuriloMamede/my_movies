@@ -156,8 +156,8 @@ class MyMoviesApiClient {
     return await db.update(
       MYMOVIES_TABLE,
       item.toMap(),
-      where: "id = ?",
-      whereArgs: [item.id],
+      where: "$MYMOVIES_ID = ? and $MYMOVIES_ID_PROFILE = ?",
+      whereArgs: [item.id, item.idProfile],
     );
   }
 }

@@ -35,6 +35,7 @@ class HomeController extends GetxController {
             title: 'Ops...', content: Text('Filme já adicionada na lista'));
       } else {
         myMoviesList.add(newMovie);
+        getMoviesRecommeded();
       }
     } catch (e) {
       Get.defaultDialog(title: 'Ops...', content: Text(e.toString()));
@@ -63,6 +64,11 @@ class HomeController extends GetxController {
     }
   }
 
+  void getMoviesRecommeded() async {
+    moviesRecomendedList
+        .assignAll(await _repository.getRecommendedMovies(profileId));
+  }
+
   void markAsWatched(index) async {
     Movie selectedMovie = myMoviesList[index];
     selectedMovie.isWatched = !selectedMovie.isWatched;
@@ -85,8 +91,7 @@ class HomeController extends GetxController {
     myMoviesList
         .assignAll(await _myMoviesRepository.getProfileMovies(profileId));
     profilesList.assignAll(await _profileRepository.getUserProfiles(userId));
-    moviesRecomendedList
-        .assignAll(await _repository.getRecommendedMovies(profileId));
+    getMoviesRecommeded();
     super.onInit();
   }
 }
