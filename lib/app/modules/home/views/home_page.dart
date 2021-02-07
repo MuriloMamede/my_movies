@@ -194,12 +194,6 @@ class HomePage extends GetView<HomeController> {
                                       ],
                                     )
                                   : ListView.builder(
-                                      /* gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  childAspectRatio: 1,
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 1,
-                                                  mainAxisSpacing: 1),*/
                                       scrollDirection: Axis.horizontal,
                                       itemCount:
                                           _homeController.myMoviesList.length,
@@ -252,12 +246,6 @@ class HomePage extends GetView<HomeController> {
                                         )),
                                   )
                                 : ListView.builder(
-                                    /* gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                childAspectRatio: 1,
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 1,
-                                                mainAxisSpacing: 1),*/
                                     scrollDirection: Axis.horizontal,
                                     itemCount: _homeController
                                         .moviesRecomendedList.length,
